@@ -78,12 +78,14 @@ export const DoubleRange = ({ cuts, currentNote, onCutsChange }: Props) => {
 
         const rect = event.currentTarget.getBoundingClientRect();
 
+        const onePercent = rect.width / 100;
+
         // Push new cut to cuts array
         onCutsChange([
             ...cuts,
             {
-                start: left,
-                end: right,
+                start: left / onePercent,
+                end: right / onePercent,
                 background,
                 border,
                 notesAmount: getNotesAmount(currentNote, rect, left, right),
