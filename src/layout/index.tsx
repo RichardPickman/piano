@@ -32,7 +32,7 @@ interface Props {
 export const Layout = ({ currentNote, notes, onClick, onRemove }: Props) => {
     const container = useRef<HTMLDivElement | null>(null);
     const { isActive, rect, renderFloatCard } = useFloatValues();
-    const layout = useLayout(container, !!currentNote, onRemove);
+    const layout = useLayout(container, !!currentNote);
 
     const handleCardClick = (event: ClickEvent, item: NoteAttributes) => {
         renderFloatCard(event.currentTarget.getBoundingClientRect());
