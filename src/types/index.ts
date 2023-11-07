@@ -15,6 +15,7 @@ export interface CurrentNote {
 }
 
 export type Attributes = {
+    id: string;
     fill: string;
     fillOpacity?: number;
 };
