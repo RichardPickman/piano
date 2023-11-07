@@ -21,16 +21,28 @@ export const SingleCut = ({ cut, onRemove }: Props) => {
     const [left, setLeft] = useState<number>(0);
     const [right, setRight] = useState<number>(0);
 
+    const handleSize = useCallback(() => {
+        const rect = container.current!.getBoundingClientRect();
+        const onePercent = rect.width / 100;
+
+        setLeft(onePercent * start);
+        setRight(onePercent * end);
+    }, [end, start]);
+
     // Personally I think it's overengineering, but I can't live knowing that cut being rendered with absolute values;
     useEffect(() => {
         if (container.current) {
-            const rect = container.current!.getBoundingClientRect();
-            const onePercent = rect.width / 100;
-
-            setLeft(onePercent * start);
-            setRight(onePercent * end);
+            handleSize();
         }
-    }, [container, end, start]);
+    }, [container, handleSize]);
+
+    useEffect(() => {
+        window.addEventListener('resize', handleSize);
+
+        return () => {
+            window.removeEventListener('resize', handleSize);
+        };
+    }, [handleSize]);
 
     return (
         <div
