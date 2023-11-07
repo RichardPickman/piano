@@ -69,7 +69,5 @@ export const useLayout = (
         cardWidth,
         containerRect,
         containerWidth,
-        setListLayout,
-        setMainLayout,
     };
 };
