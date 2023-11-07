@@ -1,5 +1,5 @@
-import { UUID } from "crypto";
-import { MouseEvent } from "react";
+import { UUID } from 'crypto';
+import { MouseEvent } from 'react';
 
 export interface Note {
     start: number;

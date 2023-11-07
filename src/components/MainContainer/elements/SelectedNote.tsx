@@ -34,7 +34,7 @@ export const SelectedNote = ({
 }: SelectedNoteProps) => {
     return (
         <AnimatePresence>
-            <Card key="selected-note" className="relative" {...variants}>
+            <Card key="selected-note" className="relative flex" {...variants}>
                 <NoteItem attributes={currentNote} />
                 <div
                     onClick={moveCaret}

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { NoteAttributes } from "@/types";
-import { ReactNode, createContext, useState } from "react";
+import { NoteAttributes } from '@/types';
+import { ReactNode, createContext, useState } from 'react';
 
 interface Props {
     notes: NoteAttributes[];
@@ -17,7 +17,7 @@ interface NoteContext {
 export const Notes = createContext<NoteContext>({
     currentNote: null,
     notes: [],
-    onNoteChange: (note) => {},
+    onNoteChange: note => {},
 });
 
 export const NotesProvider = ({ notes, children }: Props) => {

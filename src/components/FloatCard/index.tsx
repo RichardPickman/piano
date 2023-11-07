@@ -1,6 +1,6 @@
-import { AnimatePresence, m } from "framer-motion";
-import { NoteItem } from "../Note";
-import { NoteAttributes } from "../../types";
+import { AnimatePresence, m } from 'framer-motion';
+import { NoteItem } from '../Note';
+import { NoteAttributes } from '../../types';
 
 interface Props {
     floatData: {

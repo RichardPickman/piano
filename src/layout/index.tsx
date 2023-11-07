@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { Card } from "../components/Card";
-import { FloatCard } from "../components/FloatCard";
-import { MainContainer } from "../components/MainContainer";
-import { NoteItem } from "../components/Note";
-import { LAYOUT_GAP } from "../constants";
-import { useFloatValues } from "../hooks/useFloatValues";
-import { useLayout } from "../hooks/useLayout";
-import { ClickEvent, NoteAttributes } from "../types";
-import { cn } from "../utils";
-import { Primary } from "./elements/Primary";
-import { Secondary } from "./elements/Secondary";
+import { useRef } from 'react';
+import { Card } from '../components/Card';
+import { FloatCard } from '../components/FloatCard';
+import { MainContainer } from '../components/MainContainer';
+import { NoteItem } from '../components/Note';
+import { LAYOUT_GAP } from '../constants';
+import { useFloatValues } from '../hooks/useFloatValues';
+import { useLayout } from '../hooks/useLayout';
+import { ClickEvent, NoteAttributes } from '../types';
+import { cn } from '../utils';
+import { Primary } from './elements/Primary';
+import { Secondary } from './elements/Secondary';
 
 interface Props {
     currentNote: NoteAttributes | null;
@@ -49,16 +49,16 @@ export const Layout = ({ currentNote, notes, onClick, onRemove }: Props) => {
     return (
         <main
             className={cn(
-                "relative flex h-screen justify-center px-6 py-4 text-white",
-                isActive && "cursor-wait"
+                'relative flex h-screen justify-center px-6 py-4 text-white',
+                isActive && 'cursor-wait',
             )}
         >
             <FloatCard floatData={floatData} />
             <div
                 ref={container}
                 className={cn(
-                    "relative flex h-full w-full max-w-7xl",
-                    isActive && "pointer-events-none"
+                    'relative flex h-full w-full max-w-7xl',
+                    isActive && 'pointer-events-none',
                 )}
                 style={{ gap: LAYOUT_GAP }}
             >
@@ -76,9 +76,7 @@ export const Layout = ({ currentNote, notes, onClick, onRemove }: Props) => {
                             <Card
                                 key={item.id}
                                 className="h-fit cursor-pointer bg-slate-600"
-                                onClick={(event) =>
-                                    handleCardClick(event, item)
-                                }
+                                onClick={event => handleCardClick(event, item)}
                                 style={{ width: layout.cardWidth }}
                             >
                                 <NoteItem attributes={notes[index]} />

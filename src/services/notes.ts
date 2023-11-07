@@ -1,6 +1,6 @@
-import { Line, Note, NoteAttributes, Rect } from "../types";
+import { Line, Note, NoteAttributes, Rect } from '../types';
 
-const fetchNotes = async () => await fetch("https://pianoroll.ai/random_notes");
+const fetchNotes = async () => await fetch('https://pianoroll.ai/random_notes');
 
 export const getPianoNotes = async () => {
     try {
@@ -23,7 +23,7 @@ export const getPianoNotes = async () => {
 
         return result;
     } catch (error) {
-        console.error("Error loading data:", error);
+        console.error('Error loading data:', error);
 
         return [];
     }
@@ -34,7 +34,7 @@ type Color = { r: number; g: number; b: number };
 const generateGradientTable = (
     startColor: Color,
     endColor: Color,
-    steps: number
+    steps: number,
 ) => {
     const gradientTable = [];
     for (let i = 0; i < steps; i++) {
@@ -45,7 +45,7 @@ const generateGradientTable = (
         const b =
             startColor.b + ((endColor.b - startColor.b) * i) / (steps - 1);
         gradientTable.push(
-            `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`
+            `rgb(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)})`,
         );
     }
     return gradientTable;
@@ -60,7 +60,7 @@ const noteEndColor = { r: 28, g: 28, b: 26 };
 const backgroundColormap = generateGradientTable(
     backgroundStartColor,
     backgroundEndColor,
-    128
+    128,
 );
 const noteColormap = generateGradientTable(noteStartColor, noteEndColor, 128);
 
@@ -90,8 +90,8 @@ const drawEmptyPianoRoll = (pitch_min: number, pitch_max: number) => {
             y1: y,
             x2: 2,
             y2: y,
-            strokeWidth: it % 12 === 0 ? "0.003" : "0.001",
-            stroke: "black",
+            strokeWidth: it % 12 === 0 ? '0.003' : '0.001',
+            stroke: 'black',
             fill: backgroundColormap[12],
             fillOpacity: 0.666,
         });
@@ -105,7 +105,7 @@ const timeToX = (time: number, end: number) => time / end;
 export const getNotes = (sequence: Note[]): NoteAttributes => {
     const start = sequence[0].start;
     const end = sequence[sequence.length - 1].end - start;
-    const pitches = sequence.map((note) => note.pitch);
+    const pitches = sequence.map(note => note.pitch);
 
     // Make it at lest 2 octaves (2 * 12)
     let pitch_min = Math.min(...pitches);
@@ -172,7 +172,7 @@ export const getNotesAmount = (
     currentNote: NoteAttributes,
     rect: DOMRect,
     left: number,
-    right: number
+    right: number,
 ) => {
     const onePercent = rect.width / 100;
     const leftPointer = left / onePercent;
@@ -184,7 +184,7 @@ export const getNotesAmount = (
 
     let amount = 0;
 
-    currentNote.rectangulars.forEach((item) => {
+    currentNote.rectangulars.forEach(item => {
         if (item.x > start && item.x + item.width < end) {
             amount++;
         }

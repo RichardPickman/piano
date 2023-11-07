@@ -1,6 +1,6 @@
-import { useSpring } from "framer-motion";
-import { MutableRefObject, useCallback, useEffect, useState } from "react";
-import { GRID_COLUMNS, MAIN_WIDTH_COLUMNS, LAYOUT_GAP } from "../constants";
+import { useSpring } from 'framer-motion';
+import { MutableRefObject, useCallback, useEffect, useState } from 'react';
+import { GRID_COLUMNS, MAIN_WIDTH_COLUMNS, LAYOUT_GAP } from '../constants';
 
 const config = {
     stiffness: 200,
@@ -18,7 +18,7 @@ const config = {
 export const useLayout = (
     container: MutableRefObject<HTMLDivElement | null>,
     isMain: boolean,
-    onRemove: () => void
+    onRemove: () => void,
 ) => {
     const [containerRect, setContainerRect] = useState<DOMRect | null>(null);
     const containerWidth = containerRect ? containerRect.width : 0;
@@ -60,10 +60,10 @@ export const useLayout = (
 
     // Update container on window resize
     useEffect(() => {
-        window.addEventListener("resize", updateContainer);
+        window.addEventListener('resize', updateContainer);
 
         return () => {
-            window.removeEventListener("resize", updateContainer);
+            window.removeEventListener('resize', updateContainer);
         };
     }, [updateContainer]);
 
