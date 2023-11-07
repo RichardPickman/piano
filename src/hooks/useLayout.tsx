@@ -12,13 +12,11 @@ const config = {
  * Hook is handling the width of primary and secondary columns and exposes callbacks to set desired layout: List or Main.
  * @param container ref object of container. Needs to get DOMRect of a container
  * @param isMain boolean value, need to recalculate data and preserve layout
- * @param onRemove callback needed for setting List layout
  */
 
 export const useLayout = (
     container: MutableRefObject<HTMLDivElement | null>,
     isMain: boolean,
-    onRemove: () => void,
 ) => {
     const [containerRect, setContainerRect] = useState<DOMRect | null>(null);
     const containerWidth = containerRect ? containerRect.width : 0;
@@ -31,9 +29,7 @@ export const useLayout = (
         mainWidth.set(0);
         secondaryWidth.set(containerWidth);
         cardWidth.set(containerWidth / MAIN_WIDTH_COLUMNS - LAYOUT_GAP * 2);
-
-        onRemove();
-    }, [cardWidth, containerWidth, mainWidth, onRemove, secondaryWidth]);
+    }, [cardWidth, containerWidth, mainWidth, secondaryWidth]);
 
     const setMainLayout = useCallback(() => {
         const onePart = containerWidth / GRID_COLUMNS || 0;
@@ -65,7 +61,7 @@ export const useLayout = (
         return () => {
             window.removeEventListener('resize', updateContainer);
         };
-    }, [updateContainer]);
+    }, [container, updateContainer]);
 
     return {
         mainWidth,
