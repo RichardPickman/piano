@@ -1,6 +1,6 @@
-import { AnimatePresence, m } from 'framer-motion';
-import { NoteItem } from '../Note';
-import { NoteAttributes } from '../../types';
+import { AnimatePresence, m } from "framer-motion";
+import { NoteItem } from "../Note";
+import { NoteAttributes } from "../../types";
 
 interface Props {
     floatData: {
@@ -27,6 +27,8 @@ export const FloatCard = ({ floatData }: Props) => {
         return null;
     }
 
+    const width = (containerRect.width / 4) * 3;
+
     return (
         <AnimatePresence>
             {shouldAppear && (
@@ -41,7 +43,7 @@ export const FloatCard = ({ floatData }: Props) => {
                     animate={{
                         top: containerRect.top,
                         left: containerRect.left,
-                        width: (containerRect.width / 4) * 3,
+                        width,
                     }}
                     exit={{ opacity: 0 }}
                 >
