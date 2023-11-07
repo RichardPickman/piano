@@ -18,37 +18,25 @@ interface Props {
 export const SingleCut = ({ cut, onRemove }: Props) => {
     const container = useRef<HTMLDivElement | null>(null);
     const { start, end, background, border, notesAmount } = cut;
-    const [left, setLeft] = useState(0);
-    const [right, setRight] = useState(0);
+    const [left, setLeft] = useState<number>(0);
+    const [right, setRight] = useState<number>(0);
 
-    const handlePosition = useCallback(() => {
-        if (!container.current) {
-            return;
-        }
-
-        const rect = container.current.getBoundingClientRect();
-        const onePercent = rect.width / 100;
-
-        setLeft(onePercent * start);
-        setRight(onePercent * end);
-    }, [container, start, end, setLeft, setRight]);
-
+    // Personally I think it's overengineering, but I can't live knowing that cut being rendered with absolute values;
     useEffect(() => {
         if (container.current) {
-            handlePosition();
+            const rect = container.current!.getBoundingClientRect();
+            const onePercent = rect.width / 100;
+
+            setLeft(onePercent * start);
+            setRight(onePercent * end);
         }
-    }, [container, handlePosition]);
-
-    useEffect(() => {
-        window.addEventListener('resize', handlePosition);
-
-        return () => {
-            window.removeEventListener('resize', handlePosition);
-        };
-    }, [handlePosition]);
+    }, [container, end, start]);
 
     return (
-        <div ref={container} className="absolute h-full w-full bg-transparent">
+        <div
+            ref={container}
+            className="pointer-events-none absolute h-full w-full bg-transparent"
+        >
             <div
                 className="absolute h-full"
                 style={{
