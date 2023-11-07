@@ -45,7 +45,6 @@ export const FloatCard = ({ floatData }: Props) => {
                         left: containerRect.left,
                         width,
                     }}
-                    exit={{ opacity: 0 }}
                 >
                     <NoteItem attributes={attributes} />
                 </m.div>
