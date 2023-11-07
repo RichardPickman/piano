@@ -74,6 +74,7 @@ const drawEmptyPianoRoll = (pitch_min: number, pitch_max: number) => {
     for (let it = pitch_min; it <= pitch_max + 1; it++) {
         if ([1, 3, 6, 8, 10].includes(it % 12)) {
             result.rectangulars.push({
+                id: crypto.randomUUID(),
                 x: 0,
                 y: 1 - (it - pitch_min) / pitch_span,
                 width: 2,
@@ -86,6 +87,7 @@ const drawEmptyPianoRoll = (pitch_min: number, pitch_max: number) => {
         const y = 1 - (it - pitch_min) / pitch_span + 1 / pitch_span;
 
         result.lines.push({
+            id: crypto.randomUUID(),
             x1: 0,
             y1: y,
             x2: 2,
@@ -139,6 +141,7 @@ export const getNotes = (sequence: Note[]): NoteAttributes => {
         const y = 1 - (note.pitch - pitch_min) / pitch_span;
         const color = noteColormap[note.velocity];
         const data = {
+            id: crypto.randomUUID(),
             x,
             y,
             width,
