@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ClickEvent } from '../../../types';
 import { Cut } from '../../../types/doubleRange';
+import { useMotionValue, m } from 'framer-motion';
 
 interface Props {
     cut: Cut;
@@ -18,18 +19,20 @@ interface Props {
 export const SingleCut = ({ cut, onRemove }: Props) => {
     const container = useRef<HTMLDivElement | null>(null);
     const { start, end, background, border, notesAmount } = cut;
-    const [left, setLeft] = useState<number>(0);
-    const [right, setRight] = useState<number>(0);
-
-    const handleSize = useCallback(() => {
-        const rect = container.current!.getBoundingClientRect();
-        const onePercent = rect.width / 100;
-
-        setLeft(onePercent * start);
-        setRight(onePercent * end);
-    }, [end, start]);
+    const left = useMotionValue(0);
+    const right = useMotionValue(0);
 
     // Personally I think it's overengineering, but I can't live knowing that cut being rendered with absolute values;
+    const handleSize = useCallback(() => {
+        if (container.current) {
+            const rect = container.current.getBoundingClientRect();
+            const onePercent = rect.width / 100;
+
+            left.set(onePercent * start);
+            right.set(onePercent * end);
+        }
+    }, [end, left, right, start]);
+
     useEffect(() => {
         if (container.current) {
             handleSize();
@@ -44,17 +47,19 @@ export const SingleCut = ({ cut, onRemove }: Props) => {
         };
     }, [handleSize]);
 
+    const width = right.get() - left.get();
+
     return (
         <div
             ref={container}
             className="pointer-events-none absolute h-full w-full bg-transparent"
         >
-            <div
+            <m.div
                 className="absolute h-full"
                 style={{
-                    width: right - left,
-                    left,
-                    right,
+                    width,
+                    left: left,
+                    right: right,
                     backgroundColor: background,
                     borderLeft: `1px solid ${border}`,
                     borderRight: `1px solid ${border}`,
@@ -70,7 +75,7 @@ export const SingleCut = ({ cut, onRemove }: Props) => {
                 >
                     x
                 </div>
-            </div>
+            </m.div>
         </div>
     );
 };
