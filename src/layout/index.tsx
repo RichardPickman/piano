@@ -12,10 +12,11 @@ import { ClickEvent, NoteAttributes } from '../types';
 import { cn } from '../utils';
 import { Primary } from './elements/Primary';
 import { Secondary } from './elements/Secondary';
+import { m } from 'framer-motion';
 
 interface Props {
     currentNote: NoteAttributes | null;
-    notes: NoteAttributes[] | null;
+    notes: NoteAttributes[];
     onClick: (note: NoteAttributes) => void;
     onRemove: () => void;
 }
@@ -34,9 +35,10 @@ export const Layout = ({ currentNote, notes, onClick, onRemove }: Props) => {
     const { isActive, rect, renderFloatCard } = useFloatValues();
     const layout = useLayout(container, !!currentNote);
 
-    const handleCardClick = (event: ClickEvent, item: NoteAttributes) => {
+    const handleCardClick = (event: ClickEvent) => {
+        const index = Number(event.currentTarget.id);
         renderFloatCard(event.currentTarget.getBoundingClientRect());
-        onClick(item);
+        onClick(notes[index]);
     };
 
     const floatData = {
@@ -73,14 +75,18 @@ export const Layout = ({ currentNote, notes, onClick, onRemove }: Props) => {
                 <Secondary width={layout.secondaryWidth}>
                     {notes &&
                         notes.map((item, index) => (
-                            <Card
+                            <m.div
                                 key={item.id}
-                                className="h-fit cursor-pointer bg-slate-600"
-                                onClick={event => handleCardClick(event, item)}
+                                className="aspect-video h-fit w-full cursor-pointer rounded border bg-slate-600"
+                                id={String(index)}
+                                onClick={handleCardClick}
                                 style={{ width: layout.cardWidth }}
                             >
-                                <NoteItem attributes={notes[index]} />
-                            </Card>
+                                <NoteItem
+                                    key={item.id}
+                                    attributes={notes[index]}
+                                />
+                            </m.div>
                         ))}
                 </Secondary>
             </div>
