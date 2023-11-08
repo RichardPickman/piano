@@ -36,7 +36,8 @@ export const useLayout = (
 
         mainWidth.set(onePart * MAIN_WIDTH_COLUMNS);
         secondaryWidth.set(onePart - LAYOUT_GAP);
-    }, [containerWidth, mainWidth, secondaryWidth]);
+        cardWidth.set(onePart);
+    }, [cardWidth, containerWidth, mainWidth, secondaryWidth]);
 
     // Update container rect
     const updateContainer = useCallback(() => {
