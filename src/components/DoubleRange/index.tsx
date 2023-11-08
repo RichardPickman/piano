@@ -79,18 +79,16 @@ export const DoubleRange = ({ cuts, currentNote, onCutsChange }: Props) => {
         const rect = event.currentTarget.getBoundingClientRect();
 
         const onePercent = rect.width / 100;
+        const cut = {
+            start: left / onePercent,
+            end: right / onePercent,
+            background,
+            border,
+            notesAmount: getNotesAmount(currentNote, rect, left, right),
+        };
 
         // Push new cut to cuts array
-        onCutsChange([
-            ...cuts,
-            {
-                start: left / onePercent,
-                end: right / onePercent,
-                background,
-                border,
-                notesAmount: getNotesAmount(currentNote, rect, left, right),
-            },
-        ]);
+        onCutsChange([...cuts, cut]);
     };
 
     const removeCut = (event: ClickEvent) => {
@@ -121,13 +119,15 @@ export const DoubleRange = ({ cuts, currentNote, onCutsChange }: Props) => {
                 background={background}
                 border={border}
             />
-            {cuts.map(item => (
-                <SingleCut
-                    key={item.start + item.end}
-                    cut={item}
-                    onRemove={removeCut}
-                />
-            ))}
+            <div className="absolute h-full w-full bg-transparent">
+                {cuts.map(item => (
+                    <SingleCut
+                        key={item.start + item.end}
+                        cut={item}
+                        onRemove={removeCut}
+                    />
+                ))}
+            </div>
         </m.div>
     );
 };
