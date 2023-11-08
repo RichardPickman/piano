@@ -11,20 +11,26 @@ interface Props {
  */
 
 export const NoteItem = ({ attributes }: Props) => (
-    <div className="relative aspect-video w-full rounded border bg-slate-600">
+    <div className="relative z-0 aspect-video w-full rounded border bg-slate-400">
         <svg
-            className="relative h-full w-full bg-slate-400"
+            className="absolute h-full w-full bg-transparent"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 2 1"
         >
-            {attributes.rectangulars.map(item => (
-                <rect key={item.id} {...item} />
-            ))}
             {attributes.blanks.map(item => (
                 <rect key={item.id} {...item} />
             ))}
             {attributes.lines.map(item => (
                 <line key={item.id} {...item} />
+            ))}
+        </svg>
+        <svg
+            className="absolute z-10 h-full w-full bg-transparent"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 2 1"
+        >
+            {attributes.rectangulars.map(item => (
+                <rect key={item.id} {...item} />
             ))}
         </svg>
     </div>
