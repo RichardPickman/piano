@@ -21,6 +21,8 @@ export const getPianoNotes = async () => {
             result.push(res);
         }
 
+        console.log(result);
+
         return result;
     } catch (error) {
         console.error('Error loading data:', error);
