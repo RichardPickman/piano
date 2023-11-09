@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { ReactNode } from 'react';
 import './globals.css';
 
+const revalidate = 0;
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
