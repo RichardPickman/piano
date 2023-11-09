@@ -52,7 +52,7 @@ export const SingleCut = ({ cut, onRemove }: Props) => {
     return (
         <div
             ref={container}
-            className="pointer-events-none absolute h-full w-full bg-transparent"
+            className="absolute z-0 h-full w-full bg-transparent"
         >
             <m.div
                 className="absolute h-full"
@@ -71,7 +71,7 @@ export const SingleCut = ({ cut, onRemove }: Props) => {
                 <div
                     onMouseDown={onRemove}
                     data-unique-id={background}
-                    className="absolute right-0 top-0 z-10 flex cursor-pointer border px-2 py-0.5"
+                    className="absolute right-0 top-0 flex cursor-pointer border px-2 py-0.5"
                 >
                     x
                 </div>
