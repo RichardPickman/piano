@@ -1,6 +1,7 @@
 import { Line, Note, NoteAttributes, Rect } from '../types';
 
-const fetchNotes = async () => await fetch('https://pianoroll.ai/random_notes');
+const fetchNotes = async () =>
+    await fetch('https://pianoroll.ai/random_notes', { cache: 'no-cache' });
 
 export const getPianoNotes = async () => {
     try {
